@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Scholarly Verifier",
+  "name": "Scholarly",
   "description": "This extension verifies highlighted text on a webpage using PaLM API and Google Scholar.",
   "version": "1.0",
   "permissions": ["activeTab", "contextMenus", "scripting"],
   "action": {
     "default_popup": "./popup/popup.html",
-    "default_title": "Scholarly Verifier"
+    "default_title": "Scholarly"
   },
 
   "background": {
