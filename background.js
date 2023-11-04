@@ -1,7 +1,7 @@
 // background.js
 // Function to send the results to the popup script
 function sendResultsToPopup(results) {
-  chrome.runtime.sendMessage({ type: 'updatePopupUI', results });
+  chrome.runtime.sendMessage({ type: "updatePopupUI", results });
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -16,6 +16,15 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "lookupResource" && info.selectionText) {
     getArticles(info.selectionText);
+    chrome.scripting
+      .executeScript({
+        target: { tabId: tab.id },
+        files: ["content.js"],
+      })
+      .catch((error) => {
+        // Handle any errors that occur during script injection
+        console.error("Error injecting script:", error);
+      });
   }
 });
 
