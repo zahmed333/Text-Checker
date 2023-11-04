@@ -8,8 +8,10 @@
     "default_popup": "./popup/popup.html",
     "default_title": "Scholarly",
     "icons": {
-      "16": "./images/scholar-hat.png",
-      "32": "./images/scholar-hat.png"
+      "16": "image16.png",
+      "32": "image32.png",
+      "128": "image128.png"
+    }
   },
   "content_scripts": [
     {

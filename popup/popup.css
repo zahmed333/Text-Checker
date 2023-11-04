@@ -76,6 +76,16 @@ img {
     /* Add any specific styles you want for these boxes */
 }
 
+.result-layout {
+    display: block;
+    background-color: #CCD1E4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 100%; /* Adjust the width as needed */
+    max-height: 400px; /* Adjust the height as needed */
+    overflow: auto; /* Add overflow to handle content overflow within the dimensions */
+}
 /* Styling for the clear button */
 .clear-btn {
     display: block;
