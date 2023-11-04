@@ -1,4 +1,8 @@
 // background.js
+// Function to send the results to the popup script
+function sendResultsToPopup(results) {
+  chrome.runtime.sendMessage({ type: 'updatePopupUI', results });
+}
 
 chrome.runtime.onInstalled.addListener(() => {
   // Set up context menu at install time.
