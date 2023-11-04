@@ -4,29 +4,33 @@ const resultLayout = document.querySelector('.result-layout');
 
 // Function to switch to the Results layout
 function showResultsLayout() {
-    welcomeLayout.style.display = 'none';    // blocl = show, none = hide
-    resultLayout.style.display = 'block';
+  welcomeLayout.style.display = 'none';
+  resultLayout.style.display = 'block';
 }
 
 // Function to switch to the Welcome layout
 function showWelcomeLayout() {
-    welcomeLayout.style.display = 'block';
-    resultLayout.style.display = 'none';
+  welcomeLayout.style.display = 'block';
+  resultLayout.style.display = 'none';
 }
 
-// Example: Show Results layout when text is highlighted (we need to implement this)
-document.addEventListener('mouseup', (event) => {
-    const selectedText = window.getSelection().toString().trim();
-    if (selectedText !== '') {
-        showResultsLayout();
-        // You can now proceed to fill the Results layout with data.
-        sendHighlightedTextToBackground(selectedText);
-    } else {
-        showWelcomeLayout();
-    }
+// Implement the code to clear the search when the "Clear Search" button is clicked
+const clearButton = document.querySelector('.clear-btn');
+clearButton.addEventListener('click', () => {
+  // Clear the UI and show the Welcome layout
+  showWelcomeLayout();
+  // You can also implement the logic to clear any stored data or perform other actions.
 });
 
-// Implement code to fill the Results layout with data and handle the clear button.
+// Listen for messages from the background script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'updatePopupUI') {
+    const results = message.results;
+    updatePopupUI(results);
+  }
+});
+
+// Function to update the popup UI with data
 function updatePopupUI(results) {
   const subjectElement = document.querySelector('.subject');
   const summaryElement = document.querySelector('.summary');
@@ -42,23 +46,3 @@ function updatePopupUI(results) {
   // Show the Results layout
   showResultsLayout();
 }
-
-
-// Example: Listen for text selection and send it to the background script
-document.addEventListener('mouseup', (event) => {
-  const selectedText = window.getSelection().toString().trim();
-  if (selectedText !== '') {
-    sendHighlightedTextToBackground(selectedText);
-  } else {
-    // Handle the case when no text is selected
-    showWelcomeLayout();
-  }
-});
-
-// Implement the code to clear the search when the "Clear Search" button is clicked
-const clearButton = document.querySelector('.clear-btn');
-clearButton.addEventListener('click', () => {
-  // Clear the UI and show the Welcome layout
-  showWelcomeLayout();
-  // You can also implement the logic to clear any stored data or perform other actions.
-});
