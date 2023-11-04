@@ -11,69 +11,71 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
+const paLM_API_KEY = 'AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA';
+
+function generateSearchQuery(selectedText) {
+    const promptPrefix = "I will be using the response to this prompt to query Google Scholar. Given the following text, provide a search query related to the content of the text: ";
+    const promptPostfix = "Generate only the search query and don't provide any descriptions or elaborations on the search query.";
+    const prompt = promptPrefix + selectedText + promptPostfix;
+
+    return fetch(`https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=${paLM_API_KEY}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify({ "prompt": { "text": prompt } })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error("API key is not valid.");
+        }
+    })
+    .then(data => data.candidates[0].output.trim());
+}
+
+function summarizeText(selectedText) {
+    const prefix2 = "Examine the highlighted text. If the text is straightforward and the concept is self-evident, provide an explanation that addresses any potential misconceptions directly and clarifies the concept comprehensively. If the text is complex or abstract, identify the key concepts and provide detailed explanations for each, ensuring the context is adequately elaborated upon to facilitate a clear understanding. Avoid breaking down the sentence into smaller parts unless necessary for the explanation. Highlighted Text: ";
+    const prompt2 = prefix2 + selectedText;
+
+    return fetch(`https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=${paLM_API_KEY}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify({ "prompt": { "text": prompt2 } })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error("API key is not valid.");
+        }
+    })
+    .then(data => data.candidates[0].output.trim());
+}
+
+// Usage example:
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === "lookupResource") {
-        var selectedText = info.selectionText;
-        var paLM_API_KEY = 'AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA';
+    if (info.menuItemId === "lookupResource" && info.selectionText) {
+        const selectedText = info.selectionText;
 
-        var promptPrefix = "I will be using the response to this prompt to query Google Scholar. given the following text, provide a search query related to the content of the text: ";
-        var promptPostfix = "Generate only the search query and don't provide any descriptions or elaborations on the search query.";
-        var prompt = promptPrefix + selectedText + promptPostfix;
-
-        fetch('https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=' + paLM_API_KEY, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify({
-                "prompt": {
-                    "text": prompt
-                }
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                console.log("API key is not valid.");
-            }
-        })
-        .then(data => {
-            var generatedText = data.candidates[0].output.trim();
+        generateSearchQuery(selectedText)
+        .then(generatedText => {
             console.log("Generated text:", generatedText);
-            
-            // Call the getArticles function
-            getArticles(generatedText);
-
-            var prefix2 = "Examine the highlighted text. If the text is straightforward and the concept is self-evident, provide an explanation that addresses any potential misconceptions directly and clarifies the concept comprehensively. If the text is complex or abstract, identify the key concepts and provide detailed explanations for each, ensuring the context is adequately elaborated upon to facilitate a clear understanding. Avoid breaking down the sentence into smaller parts unless necessary for the explanation. Highlighted Text: ";
-            var prompt2 = prefix2 + selectedText
-
-            // Summarize the generated text
-            fetch('https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=' + paLM_API_KEY, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                },
-                body: JSON.stringify({
-                    "prompt": {
-                        "text": prompt2
-                    }
-                })
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    console.log("API key is not valid.");
-                }
-            })
-            .then(data => {
-                var summarizedText = data.candidates[0].output.trim();
-                console.log("Summarized text:", summarizedText);
-            })
-            .catch(error => {
-                console.log("Error:", error);
+            // Call the getArticles function and process further as needed
+            getArticles(generatedText).then(articles => {
+                // Do something with the articles
+                sendResultsToPopup(articles);
             });
+
+            // Now we can also summarize the text
+            return summarizeText(selectedText);
+        })
+        .then(summarizedText => {
+            console.log("Summarized text:", summarizedText);
+            // Process the summarized text as needed
         })
         .catch(error => {
             console.log("Error:", error);
