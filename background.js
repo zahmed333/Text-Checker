@@ -7,8 +7,8 @@ function sendResultsToPopup(results) {
 chrome.runtime.onInstalled.addListener(() => {
   // Set up context menu at install time.
   chrome.contextMenus.create({
-    id: "lookupResource",
-    title: "Look for resources",
+    id: "Scholarly",
+    title: "Enlighten Me!",
     contexts: ["selection"],
   });
 });
