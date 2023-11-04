@@ -8,7 +8,7 @@ body {
 
 /* Container for the entire popup */
 .container {
-    max-width: 320px;
+    max-width: 350px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -24,16 +24,17 @@ img {
 /* Styling for the Welcome layout */
 .welcome-layout {
     text-align: center;
+    max-width: 100%;
 }
 
 /* Styling for the header and subheader */
-h1 {
-    color: #4942E4; /* Blue color for h1 and h2 */
-    margin: 10px 0;
+#description {
+    color: #8696FE;
 }
 
-h2 {
-    color: #8696FE;
+.intro {
+    color: #4942E4;
+    margin: 10px 0 0; /* Adjust the top margin to bring h1 and h2 closer */
 }
 
 .title {
