@@ -1,0 +1,87 @@
+/* Reset default margin and padding for the entire page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* Container for the entire popup */
+.container {
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Styling for the header image */
+img {
+    display: block;
+    margin: 0 auto;
+    max-width: 75%;
+    border-radius: 8px;
+}
+
+/* Styling for the Welcome layout */
+.welcome-layout {
+    text-align: center;
+}
+
+/* Styling for the header and subheader */
+h1 {
+    color: #4942E4; /* Blue color for h1 and h2 */
+    margin: 10px 0;
+}
+
+h2 {
+    color: #8696FE;
+}
+
+.title {
+    color: #2F3A8F; /* Blue color for h1 and h2 */
+}
+
+/* Styling for the Results layout */
+.result-layout {
+    display: block;
+    background-color: #CCD1E4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the subject, errors, and data sections */
+.subject, .errors, .data {
+    margin: 10px 0;
+}
+
+/* Styling for the Summary and Scholarly Sources boxes */
+.scrollable-box {
+    max-height: 150px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #EEEEEE; /* Lightest color for the boxes background */
+    margin: 10px 0;
+}
+
+/* Styling for specific boxes, e.g., summary-box and sources-box titles */
+.summary-box, .sources-box {
+    /* Add any specific styles you want for these boxes */
+}
+
+/* Styling for the clear button */
+.clear-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #7C73E6; /* Light pink for the clear button background */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.clear-btn:hover {
+    background-color: #2F3A8F; /* Darker pink for hover effect */
+}
