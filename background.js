@@ -2,6 +2,7 @@ const paLM_API_KEY = "AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA";
 
 function sendResultsToPopup(results) {
   chrome.runtime.sendMessage({ type: "updatePopupUI", results });
+  chrome.runtime.sendMessage({ type: "updatePopupUI", results });
 }
 
 chrome.runtime.onInstalled.addListener(() => {

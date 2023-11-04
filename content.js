@@ -28,6 +28,7 @@
       closeButton.onclick = function () {
         widgetContainer.remove();
       };
+      //TODO: clear search button
     }
   } catch (error) {
     console.error("Failed to fetch widget HTML: ", error);
