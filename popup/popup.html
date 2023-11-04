@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Scholarly Verifier</title>
+    <link rel="stylesheet" href="./popup.css">
+</head>
+<body class="container">
+    <img alt="Scholarly Verifier logo" src="../images/scholar-hat.png"/>
+    <div class="welcome-layout">
+        <div class="intro">
+            <h1>Welcome to Scholarly</h1>
+            <h2>Your Personal Citation Verifier!</h2>
+        </div>
+        <h2 id="description">New? Highlight keywords, phrases, or sentences you want to explore!</h2>
+    </div>
+
+    <div class="result-layout">
+        <div class="subject">
+			<h3 class="title">Your Subject</h3>
+		</div>
+        <div class="errors"></div>
+        <div class="data"></div>
+        <div class="result-container" >
+            <p  class="title"><strong>Summary:</strong></p>
+            <div class="scrollable-box summary-box">
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <span class="summary"></span>
+            </div>
+            <p  class="title"><strong>Scholarly Sources:</strong></p>
+            <div class="scrollable-box sources-box">
+				<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                <span class="sources"></span>
+            </div>
+        </div>
+        <button class="clear-btn">Clear Search</button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
+    <!-- <div class="result-layout" style="display: none;"> -->
