@@ -134,3 +134,21 @@
   /* Optional: if you know the width of the image, you can set it here and it will also help with centering */
   width: 48px; /* image's width */ /* Replace with your image's width */
 }
+
+ul {
+  list-style-type: disc !important;
+  margin-left: 10px !important; /* Adjust the left margin */
+}
+
+#my-extension-widget li {
+  list-style: disc !important; /* Show bullet points and make it !important */
+}
+
+#my-extension-widget li a {
+  color: #004b83 !important; /* Change the color to your preferred value */
+  text-decoration: underline !important; /* Add underline, if desired */
+}
+
+#my-extension-widget li a:visited {
+  color: #a345c9 !important; /* Color for visited links */
+}
