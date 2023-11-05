@@ -26,6 +26,12 @@
 
     // Append the widget to the body
     document.body.appendChild(widgetContainer);
+      console.log(chrome.runtime.getURL(
+        "../images/logo_48.png"
+      ));
+    document.getElementById("top-image").src = chrome.runtime.getURL(
+      "../images/logo_48.png"
+    );
 
     // Close button functionality
     const closeButton = document.getElementById("my-widget-close");

@@ -25,7 +25,8 @@
         "widget/styles.css",
         "widget/widget.html",
         "loading/loading.html",
-        "loading/styles.css"
+        "loading/styles.css",
+        "images/*"
       ],
       "matches": ["<all_urls>"]
     }

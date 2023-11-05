@@ -66,6 +66,16 @@
   max-width: 100% !important;
 }
 
+.background-image {
+  background-image: url('../images/logo_48.jpg');
+  background-size: cover; /* or contain, depending on the effect you want */
+  background-position: center;
+  background-repeat: no-repeat;
+  /* height: 200px; /* You must define a size for the div */
+  /* width: 100%; */ 
+}
+
+
 .button-box {
   border: 2px solid !important;
   background-color: #9A86A4 !important;
@@ -95,4 +105,16 @@
 .button-box:hover {
   background-color: #2F3A8F !important;
   color: #454471 !important;
+}
+
+.image-container {
+  text-align: center; /* This will center the image if it's an inline element or an inline-block element */
+}
+
+#top-image {
+  display: block; /* This makes the image a block element */
+  margin-left: auto; /* This, along with margin-right, will center the image */
+  margin-right: auto;
+  /* Optional: if you know the width of the image, you can set it here and it will also help with centering */
+  width: 48px; /* image's width */ /* Replace with your image's width */
 }
