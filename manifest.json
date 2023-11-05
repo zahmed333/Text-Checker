@@ -21,15 +21,12 @@
   "host_permissions": ["https://serpapi.com/*"],
   "web_accessible_resources": [
     {
-      "resources": ["widget/styles.css", "widget/widget.html"],
-      "matches": ["<all_urls>"]
-    }
-  ]
-
-  "host_permissions": ["https://serpapi.com/*"],
-  "web_accessible_resources": [
-    {
-      "resources": ["widget/styles.css", "widget/widget.html"],
+      "resources": [
+        "widget/styles.css",
+        "widget/widget.html",
+        "loading/loading.html",
+        "loading/styles.css"
+      ],
       "matches": ["<all_urls>"]
     }
   ]
