@@ -15,9 +15,8 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       target: { tabId: tab.id },
       files: ["contents/loading.js"],
     });
-
     const selectedText = info.selectionText;
-    let generatedText, articles, summarizedText;
+    let generatedText, articles, summarizedText, title;
 
     try {
       generatedText = await generateSearchQuery(selectedText);
@@ -26,6 +25,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       return;
     }
 
+    try {
+      title = await generateTitle(generatedText);
+    } catch (error) {
+      console.log("Error:", error);
+      return;
+    }
     try {
       articles = await getArticles(generatedText);
     } catch (error) {
@@ -52,6 +57,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
             generatedText,
             summarizedText,
             articles,
+            title,
           });
         }
       })
@@ -67,6 +73,35 @@ async function generateSearchQuery(selectedText) {
   const promptPostfix =
     "Generate only the search query and don't provide any descriptions or elaborations on the search query.";
   const prompt = promptPrefix + selectedText + promptPostfix;
+
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=${paLM_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify({ prompt: { text: prompt } }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("API key is not valid or another error occurred.");
+    }
+
+    const data = await response.json();
+    return data.candidates[0].output.trim();
+  } catch (error) {
+    console.error("Error:", error);
+    throw error; // or return a default value
+  }
+}
+
+async function generateTitle(searchQuery) {
+  const promptPrefix =
+    "Paraphrase the following phrase so that it has a maximum of 8 words. I'm aiming to use it as a title so it has to be short and concise. the text is: ";
+  const prompt = promptPrefix + searchQuery;
 
   try {
     const response = await fetch(
