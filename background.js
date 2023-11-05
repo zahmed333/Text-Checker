@@ -18,7 +18,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       target: { tabId: tab.id },
       files: ["contents/loading.js"],
     });
-    return;
     const selectedText = info.selectionText;
     let generatedText, articles, summarizedText;
 
