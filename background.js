@@ -31,6 +31,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       console.log("Error:", error);
       return;
     }
+
     try {
       articles = await getArticles(generatedText);
     } catch (error) {
