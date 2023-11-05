@@ -15,7 +15,12 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId === "lookupResource" && info.selectionText) {
+  if (info.menuItemId === "Scholarly" && info.selectionText) {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ["contents/loading.js"],
+    });
+
     const selectedText = info.selectionText;
     let generatedText, articles, summarizedText;
 
@@ -25,15 +30,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       console.log("Error:", error);
       return;
     }
-    // console.log(generatedText);
 
-    try {
-      articles = await getArticles(generatedText);
-    } catch (error) {
-      console.log("Error:", error);
-      return;
-    }
-    console.log(articles);
+    // try {
+    //   articles = await getArticles(generatedText);
+    // } catch (error) {
+    //   console.log("Error:", error);
+    //   return;
+    // }
+    articles = [{ title: "title", link: "link" }];
 
     try {
       summarizedText = await summarizeText(generatedText);
@@ -41,12 +45,11 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       console.log("Error:", error);
       return;
     }
-    // console.log(summarizedText);
 
     chrome.scripting
       .executeScript({
         target: { tabId: tab.id },
-        files: ["content.js"],
+        files: ["contents/content.js"],
       })
       .then(() => {
         if (tab.id) {
@@ -122,7 +125,7 @@ function summarizeText(selectedText) {
 async function getArticles(text) {
   const searchQuery = text;
   const apiKey =
-    "0767298fd222b2cf5a66270610c6cd8cd894b725cf8f87dad2a90f2490635350";
+    "d1f10ececbc17ac8c3c08e63296a0f476c7fd0326d0da29ea8da97d545d3ac5c";
   const url = `https://serpapi.com/search.json?engine=google_scholar&q=${encodeURIComponent(
     searchQuery
   )}&api_key=${apiKey}`;
