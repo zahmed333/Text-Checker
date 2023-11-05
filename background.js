@@ -1,4 +1,4 @@
-const paLM_API_KEY = "AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA";
+const paLM_API_KEY = "d1f10ececbc17ac8c3c08e63296a0f476c7fd0326d0da29ea8da97d545d3ac5c";
 
 function sendResultsToPopup(results) {
   chrome.runtime.sendMessage({ type: "updatePopupUI", results });
