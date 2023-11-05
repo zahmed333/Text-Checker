@@ -1,4 +1,7 @@
 (async function () {
+  if (document.getElementById("my-extension-widget")) {
+    document.getElementById("my-extension-widget").remove();
+  }
   // Inject CSS
   const styleLink = document.createElement("link");
   styleLink.rel = "stylesheet";
