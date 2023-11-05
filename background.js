@@ -1,5 +1,8 @@
 const paLM_API_KEY = "AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA";
 
+
+
+
 chrome.runtime.onInstalled.addListener(() => {
   // Set up context menu at install time.
   chrome.contextMenus.create({

@@ -33,10 +33,13 @@
       closeButton.onclick = function () {
         widgetContainer.remove();
       };
-      //TODO: clear search button
     }
   } catch (error) {
     console.error("Failed to fetch widget HTML: ", error);
+  }
+
+  function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 
   // Update widget content with data received from the background script
@@ -46,7 +49,12 @@
     const articlesEl = document.getElementById("hyperlinks-placeholder");
 
     if (generatedTextEl && generatedText) {
-      generatedTextEl.textContent = generatedText;
+      const capitalizedGeneratedText = generatedText
+        .split(" ")
+        .map(capitalizeFirstLetter)
+        .join(" ");
+
+        generatedTextEl.textContent = capitalizedGeneratedText;
     }
 
     if (summarizedTextEl && summarizedText) {
