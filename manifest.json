@@ -20,14 +20,13 @@
   },
   "host_permissions": ["https://serpapi.com/*"],
   "web_accessible_resources": [
-    "chrome-extension://lpiacbmpemoagflbhoidmblkbhgfkojm/images/loading.gif",
-    "images/loading.gif",
     {
       "resources": [
         "widget/styles.css",
         "widget/widget.html",
         "loading/loading.html",
-        "loading/styles.css"
+        "loading/styles.css",
+        "images/*"
       ],
       "matches": ["<all_urls>"]
     }
