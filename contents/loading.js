@@ -27,4 +27,13 @@
   } catch (error) {
     console.error("Failed to fetch widget HTML: ", error);
   }
+  console.log(chrome.runtime.getURL("../images/loading.gif"));
+
+  document.getElementById("loading-img").src = chrome.runtime.getURL(
+    "../images/loading.gif"
+  );
+
+  document.getElementById("loading-logo").src = chrome.runtime.getURL(
+    "../images/logo_128.png"
+  );
 })();

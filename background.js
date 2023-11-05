@@ -1,9 +1,7 @@
 const paLM_API_KEY = "AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA";
 
-function sendResultsToPopup(results) {
-  chrome.runtime.sendMessage({ type: "updatePopupUI", results });
-  chrome.runtime.sendMessage({ type: "updatePopupUI", results });
-}
+
+
 
 chrome.runtime.onInstalled.addListener(() => {
   // Set up context menu at install time.
@@ -20,7 +18,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       target: { tabId: tab.id },
       files: ["contents/loading.js"],
     });
-
+    return;
     const selectedText = info.selectionText;
     let generatedText, articles, summarizedText;
 
