@@ -34,14 +34,23 @@
     console.error("Failed to fetch widget HTML: ", error);
   }
 
+  function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }
+
   // Update widget content with data received from the background script
   function updateWidgetContent(generatedText, summarizedText) {
     const generatedContentEl = document.getElementById("generated-content");
     const summarizedContentEl = document.getElementById("summarized-content");
 
     if (generatedContentEl && generatedText) {
-      generatedContentEl.textContent = generatedText;
-    }
+    const capitalizedGeneratedText = generatedText
+      .split(" ")
+      .map(capitalizeFirstLetter)
+      .join(" ");
+
+    generatedContentEl.textContent = capitalizedGeneratedText;
+  }
 
     if (summarizedContentEl && summarizedText) {
       summarizedContentEl.textContent = summarizedText;
