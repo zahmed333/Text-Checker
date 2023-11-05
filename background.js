@@ -32,13 +32,13 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       return;
     }
 
-    // try {
-    //   articles = await getArticles(generatedText);
-    // } catch (error) {
-    //   console.log("Error:", error);
-    //   return;
-    // }
-    articles = [{ title: "title", link: "link" }];
+    try {
+      articles = await getArticles(generatedText);
+    } catch (error) {
+      console.log("Error:", error);
+      return;
+    }
+    // articles = [{ title: "title", link: "link" }];
 
     try {
       summarizedText = await summarizeText(generatedText);
