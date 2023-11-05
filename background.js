@@ -1,8 +1,5 @@
 const paLM_API_KEY = "AIzaSyBMkoVhbGmiu_Vn8kfJxg-dBYTFt7Uh6TA";
 
-
-
-
 chrome.runtime.onInstalled.addListener(() => {
   // Set up context menu at install time.
   chrome.contextMenus.create({
@@ -18,7 +15,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       target: { tabId: tab.id },
       files: ["contents/loading.js"],
     });
-    return;
+
     const selectedText = info.selectionText;
     let generatedText, articles, summarizedText;
 
@@ -29,13 +26,13 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       return;
     }
 
-    // try {
-    //   articles = await getArticles(generatedText);
-    // } catch (error) {
-    //   console.log("Error:", error);
-    //   return;
-    // }
-    articles = [{ title: "title", link: "link" }];
+    try {
+      articles = await getArticles(generatedText);
+    } catch (error) {
+      console.log("Error:", error);
+      return;
+    }
+    // articles = [{ title: "title", link: "link" }];
 
     try {
       summarizedText = await summarizeText(generatedText);
