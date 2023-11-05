@@ -20,6 +20,8 @@
   },
   "host_permissions": ["https://serpapi.com/*"],
   "web_accessible_resources": [
+    "chrome-extension://lpiacbmpemoagflbhoidmblkbhgfkojm/images/loading.gif",
+    "images/loading.gif",
     {
       "resources": [
         "widget/styles.css",
