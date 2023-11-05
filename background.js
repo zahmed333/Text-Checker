@@ -155,11 +155,13 @@ function summarizeText(selectedText) {
 
 async function getArticles(text) {
   const searchQuery = text;
-  const apiKey =
-    "d1f10ececbc17ac8c3c08e63296a0f476c7fd0326d0da29ea8da97d545d3ac5c";
-  const url = `https://serpapi.com/search.json?engine=google_scholar&q=${encodeURIComponent(
-    searchQuery
-  )}&api_key=${apiKey}`;
+  // const apiKey =
+  //   "d1f10ececbc17ac8c3c08e63296a0f476c7fd0326d0da29ea8da97d545d3ac5c";
+  // const url = `https://serpapi.com/search.json?engine=google_scholar&q=${encodeURIComponent(
+  //   searchQuery
+  // )}&api_key=${apiKey}`;
+
+  const url = `https://wmohamed.pythonanywhere.com/get_articles?search_query=${searchQuery}`;
 
   try {
     const response = await fetch(url);
@@ -167,12 +169,12 @@ async function getArticles(text) {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    const simplifiedResults = data.organic_results.map((result) => ({
-      title: result.title,
-      link: result.link,
-      snippet: result.snippet,
-    }));
-    return simplifiedResults;
+    // const simplifiedResults = data.organic_results.map((result) => ({
+    //   title: result.title,
+    //   link: result.link,
+    //   snippet: result.snippet,
+    // }));
+    return data;
   } catch (error) {
     console.error("Fetch error:", error);
   }
