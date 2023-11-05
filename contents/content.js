@@ -26,9 +26,7 @@
 
     // Append the widget to the body
     document.body.appendChild(widgetContainer);
-      console.log(chrome.runtime.getURL(
-        "../images/logo_48.png"
-      ));
+    console.log(chrome.runtime.getURL("../images/logo_48.png"));
     document.getElementById("top-image").src = chrome.runtime.getURL(
       "../images/logo_48.png"
     );
@@ -49,18 +47,18 @@
   }
 
   // Update widget content with data received from the background script
-  function updateWidgetContent(generatedText, summarizedText, articles) {
+  function updateWidgetContent(generatedText, summarizedText, articles, title) {
     const generatedTextEl = document.getElementById("query-placeholder");
     const summarizedTextEl = document.getElementById("summary-placeholder");
     const articlesEl = document.getElementById("hyperlinks-placeholder");
 
-    if (generatedTextEl && generatedText) {
-      const capitalizedGeneratedText = generatedText
+    if (generatedTextEl && title) {
+      const capitalizedGeneratedText = title
         .split(" ")
         .map(capitalizeFirstLetter)
         .join(" ");
 
-        generatedTextEl.textContent = capitalizedGeneratedText;
+      generatedTextEl.textContent = capitalizedGeneratedText;
     }
 
     if (summarizedTextEl && summarizedText) {
@@ -86,13 +84,19 @@
 
   // Listen for messages from the background script
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.generatedText || message.summarizedText || message.articles) {
+    if (
+      message.generatedText ||
+      message.summarizedText ||
+      message.articles ||
+      message.title
+    ) {
       // Now you have access to the variables in the content script
 
       updateWidgetContent(
         message.generatedText,
         message.summarizedText,
-        message.articles
+        message.articles,
+        message.title
       );
     }
   });
